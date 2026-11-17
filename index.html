@@ -2,37 +2,56 @@
 <html lang="ms">
 <head>
     <meta charset="UTF-8">
-    <title>Sistem Penyelenggaraan Mesin</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f6f9; }
-        h1 { color: #1e293b; }
-        table { width: 100%; border-collapse: collapse; background: white; margin-top: 20px; }
-        th, td { padding: 12px; border: 1px solid #cbd5e1; text-align: left; }
-        th { background-color: #2563eb; color: white; }
-    </style>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Simulasi Penyelenggaraan Mesin</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Rekod Penyelenggaraan Mesin (Machine Maintenance)</h1>
-    <p>Senarai semak status dan jadual servis mesin semasa:</p>
-    <table>
-        <tr>
-            <th>ID Mesin</th>
-            <th>Nama Mesin</th>
-            <th>Tarikh Servis Terakhir</th>
-            <th>Status</th>
-        </tr>
-        <tr>
-            <td>M-001</td>
-            <td>Mesin CNC Milling</td>
-            <td>10/11/2026</td>
-            <td>Beroperasi Baik</td>
-        </tr>
-        <tr>
-            <td>M-002</td>
-            <td>Pemampat Udara (Air Compressor)</td>
-            <td>02/11/2026</td>
-            <td>Perlu Pemeriksaan</td>
-        </tr>
-    </table>
+    <div class="kontena-utama">
+        <!-- Tajuk Utama & Subtopik (Dikawal oleh Guru di Admin) -->
+        <h1 id="paparan-tajuk">MACHINE MAINTENANCE DMA2252 KOLEJ VOKASIONAL KERIAN</h1>
+        <h2 id="paparan-subtopik" class="subtajuk">SUBTOPIK (PREVENTIVE MAINTENANCE)</h2>
+
+        <div class="kotak-login">
+            <h3>Log Masuk Pelajar</h3>
+            <p class="arahan">Masukkan nama dan kata laluan watak yang diberikan oleh guru.</p>
+
+            <div class="kumpulan-input">
+                <label for="namaPelajar">Nama Pelajar:</label>
+                <input type="text" id="namaPelajar" placeholder="Contoh: Ali bin Abu">
+            </div>
+
+            <div class="kumpulan-input">
+                <label for="kataLaluan">Kata Laluan Watak:</label>
+                <input type="password" id="kataLaluan" placeholder="Masukkan kata laluan pelajar">
+            </div>
+
+            <button class="btn-utama" onclick="semakLogMasukPelajar()">Log Masuk Simulasi</button>
+            <p id="mesej-ralat" class="ralat">Kata laluan tidak sah! Sila semak dengan guru anda.</p>
+
+            <hr class="pemisah">
+
+            <!-- Butang Khusus untuk Guru / Admin -->
+            <button class="btn-admin" onclick="bukaModalAdmin()">🔐 Panel Guru / Admin</button>
+        </div>
+    </div>
+
+    <!-- Modal Pengesahan Kata Laluan Admin -->
+    <div id="modal-admin" class="modal-latar">
+        <div class="modal-kotak">
+            <h3>Akses Guru / Admin</h3>
+            <p>Masukkan kata laluan pentadbir untuk mengurus tetapan kelas.</p>
+            <div class="kumpulan-input">
+                <input type="password" id="passAdminInput" placeholder="Kata laluan admin">
+            </div>
+            <p id="ralat-admin" class="ralat">Kata laluan Admin salah!</p>
+            <div class="baris-butang">
+                <button class="btn-batal" onclick="tutupModalAdmin()">Batal</button>
+                <button class="btn-utama" onclick="sahkanAdmin()">Masuk Panel</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
 </body>
 </html>

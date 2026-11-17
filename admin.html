@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel Guru / Admin - DMA2252</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="halaman-admin">
+    <div class="kontena-admin">
+        <div class="header-admin">
+            <div>
+                <h2>⚙️ Panel Kawalan Guru / Admin</h2>
+                <p>Ubah tajuk kursus, senarai nama pelajar, dan kata laluan 5 watak simulasi.</p>
+            </div>
+            <button class="btn-batal" onclick="logKeluarAdmin()">← Kembali ke Log Masuk</button>
+        </div>
+
+        <!-- Bahagian 1: Ubah Tajuk & Subtopik -->
+        <div class="kad-admin">
+            <h3>1. Tetapan Tajuk Program</h3>
+            <div class="kumpulan-input">
+                <label for="inputTajukUtama">Tajuk Utama:</label>
+                <input type="text" id="inputTajukUtama">
+            </div>
+            <div class="kumpulan-input">
+                <label for="inputSubtopik">Subtopik PdP:</label>
+                <input type="text" id="inputSubtopik">
+            </div>
+        </div>
+
+        <!-- Bahagian 2: Tetapan 5 Watak Pelajar -->
+        <div class="kad-admin">
+            <h3>2. Tetapan Nama Pelajar & Kata Laluan (5 Watak)</h3>
+            <table class="jadual-admin">
+                <thead>
+                    <tr>
+                        <th>Watak Simulasi</th>
+                        <th>Nama Pelajar</th>
+                        <th>Kata Laluan</th>
+                    </tr>
+                </thead>
+                <tbody id="senarai-watak-admin">
+                    <!-- Dijana secara automatik oleh app.js -->
+                </tbody>
+            </table>
+        </div>
+
+        <div id="notis-simpan" class="notis-berjaya">✅ Semua tetapan berjaya disimpan!</div>
+
+        <div class="baris-butang">
+            <button class="btn-batal" onclick="setSemulaTetapan()">🔄 Set Semula Asal</button>
+            <button class="btn-simpan" onclick="simpanTetapanAdmin()">💾 Simpan Semua Tetapan</button>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,281 @@
+/* Tetapan Asas */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #0f172a;
+    color: #f8fafc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.kontena-utama {
+    text-align: center;
+    width: 100%;
+    max-width: 650px;
+    padding: 20px 16px;
+}
+
+/* Saiz tulisan fleksibel (automatik kecil di telefon, besar di desktop) */
+#paparan-tajuk {
+    font-size: clamp(18px, 4vw, 24px);
+    margin-bottom: 8px;
+    line-height: 1.4;
+}
+
+.subtajuk {
+    font-size: clamp(15px, 3.2vw, 18px);
+    color: #facc15;
+    margin-top: 0;
+    margin-bottom: 24px;
+}
+
+/* Kotak Log Masuk */
+.kotak-login {
+    background-color: #1e293b;
+    padding: 24px 20px;
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+}
+
+.kotak-login h3 {
+    margin-top: 0;
+}
+
+.arahan {
+    font-size: 14px;
+    color: #94a3b8;
+    margin-bottom: 20px;
+}
+
+.kumpulan-input {
+    margin-bottom: 16px;
+    text-align: left;
+}
+
+.kumpulan-input label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 14px;
+    color: #cbd5e1;
+}
+
+/* Font 16px mengelakkan skrin telefon auto-zoom bila ditaip */
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    background-color: #0f172a;
+    color: white;
+    font-size: 16px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #3b82f6;
+}
+
+/* Butang Mesra Sentuhan */
+button {
+    min-height: 46px;
+    padding: 12px 16px;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-utama {
+    width: 100%;
+    background-color: #2563eb;
+    color: white;
+    margin-top: 4px;
+}
+.btn-utama:hover { background-color: #1d4ed8; }
+
+.btn-admin {
+    width: 100%;
+    background-color: #d97706;
+    color: white;
+}
+.btn-admin:hover { background-color: #b45309; }
+
+.btn-simpan {
+    background-color: #16a34a;
+    color: white;
+    flex: 2;
+}
+.btn-simpan:hover { background-color: #15803d; }
+
+.btn-batal {
+    background-color: #475569;
+    color: white;
+    flex: 1;
+}
+.btn-batal:hover { background-color: #334155; }
+
+.pemisah {
+    border: 0;
+    border-top: 1px solid #334155;
+    margin: 20px 0;
+}
+
+.ralat {
+    color: #f87171;
+    font-size: 14px;
+    margin-top: 12px;
+    display: none;
+}
+
+/* Modal Admin */
+.modal-latar {
+    display: none;
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.8);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-kotak {
+    background: #1e293b;
+    padding: 24px 20px;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 380px;
+    text-align: center;
+    border: 1px solid #475569;
+}
+
+.baris-butang {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+}
+
+/* Halaman Admin (Desktop) */
+body.halaman-admin {
+    align-items: flex-start;
+    padding: 24px 16px;
+}
+
+.kontena-admin {
+    width: 100%;
+    max-width: 820px;
+}
+
+.header-admin {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 15px;
+}
+
+.header-admin h2 { margin: 0 0 5px 0; color: #facc15; font-size: 20px; }
+.header-admin p { margin: 0; font-size: 14px; color: #94a3b8; }
+
+.kad-admin {
+    background-color: #1e293b;
+    padding: 20px 16px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+}
+
+.kad-admin h3 {
+    margin-top: 0;
+    border-bottom: 1px solid #334155;
+    padding-bottom: 10px;
+    font-size: 17px;
+}
+
+.jadual-admin {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.jadual-admin th,
+.jadual-admin td {
+    padding: 10px 8px;
+    text-align: left;
+    border-bottom: 1px solid #334155;
+}
+
+.jadual-admin th { color: #94a3b8; font-size: 14px; }
+
+.notis-berjaya {
+    display: none;
+    background-color: #14532d;
+    color: #bbf7d0;
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 15px;
+    font-weight: bold;
+}
+
+/* =========================================================
+   PENYESUAIAN KHUSUS TELEFON PINTAR (Skrin <= 640px)
+   ========================================================= */
+@media (max-width: 640px) {
+    /* Susun header admin secara menegak */
+    .header-admin {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: left;
+    }
+
+    /* Tukar jadual 3 lajur menjadi kad menegak supaya input lebar penuh */
+    .jadual-admin thead {
+        display: none;
+    }
+
+    .jadual-admin,
+    .jadual-admin tbody,
+    .jadual-admin tr,
+    .jadual-admin td {
+        display: block;
+        width: 100%;
+    }
+
+    .jadual-admin tr {
+        background-color: #0f172a;
+        border: 1px solid #334155;
+        border-radius: 10px;
+        padding: 12px;
+        margin-bottom: 12px;
+    }
+
+    .jadual-admin td {
+        border: none;
+        padding: 6px 0;
+    }
+
+    /* Paparkan label kecil di atas setiap kotak input pada telefon */
+    .jadual-admin td[data-label]:not(:first-child)::before {
+        content: attr(data-label);
+        display: block;
+        font-size: 12px;
+        color: #94a3b8;
+        margin-bottom: 4px;
+    }
+
+    /* Susun butang simpan & set semula secara menegak di telefon */
+    .kontena-admin .baris-butang {
+        flex-direction: column-reverse;
+    }
+}
