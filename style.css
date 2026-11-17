@@ -205,6 +205,29 @@ button {
 }
 .btn-padam-kecil:hover { background-color: #b91c1c; }
 
+.btn-padam-soalan {
+    min-height: 34px;
+    padding: 6px 12px;
+    font-size: 13px;
+    background-color: #991b1b;
+    color: #fecaca;
+    border: 1px solid #ef4444;
+}
+.btn-padam-soalan:hover { background-color: #7f1d1d; }
+
+.btn-tambah-soalan {
+    width: 100%;
+    margin-top: 16px;
+    background-color: #1e3a8a;
+    color: #93c5fd;
+    border: 2px dashed #3b82f6;
+    font-size: 15px;
+}
+.btn-tambah-soalan:hover {
+    background-color: #1d4ed8;
+    color: white;
+}
+
 .pemisah {
     border: 0;
     border-top: 1px solid #334155;
@@ -338,6 +361,14 @@ body.halaman-simulasi {
     padding-bottom: 8px;
     border-bottom: 1px solid #1e293b;
     color: #38bdf8;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.kumpulan-butang-editor {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
 .grid-input-pilihan {
@@ -651,5 +682,300 @@ body.halaman-simulasi {
 
     .kontena-admin .baris-butang {
         flex-direction: column-reverse;
+    }
+}
+/* =========================================================
+   DASHBOARD RUMUSAN AKHIR (4 BAHAGIAN)
+   ========================================================= */
+.header-rumusan-cetak {
+    display: none;
+}
+
+.kad-penarafan {
+    text-align: center;
+}
+
+.lencana-penarafan {
+    display: inline-block;
+    padding: 10px 20px;
+    border-radius: 999px;
+    font-size: 16px;
+    font-weight: bold;
+    margin: 10px 0 14px 0;
+}
+
+.status-optimum {
+    background-color: #14532d;
+    color: #86efac;
+    border: 1px solid #22c55e;
+}
+
+.status-pantau {
+    background-color: #78350f;
+    color: #fde68a;
+    border: 1px solid #f59e0b;
+}
+
+.status-kritikal {
+    background-color: #7f1d1d;
+    color: #fecaca;
+    border: 1px solid #ef4444;
+}
+
+.grid-4-metrik {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-top: 16px;
+}
+
+/* Jadual Pecahan Prestasi 5 Watak */
+.jadual-rumusan {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+}
+
+.jadual-rumusan th,
+.jadual-rumusan td {
+    padding: 12px 10px;
+    text-align: left;
+    border-bottom: 1px solid #334155;
+    font-size: 14px;
+}
+
+.jadual-rumusan th {
+    background-color: #0f172a;
+    color: #94a3b8;
+}
+
+.badge-status-ok {
+    background-color: #14532d;
+    color: #86efac;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.badge-status-amaran {
+    background-color: #78350f;
+    color: #fde68a;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+/* Papan Refleksi Kesilapan */
+.kotak-tiada-salah {
+    background-color: #14532d;
+    color: #bbf7d0;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid #22c55e;
+    text-align: center;
+    font-size: 15px;
+}
+
+.kad-refleksi-item {
+    background-color: #0f172a;
+    border: 1px solid #334155;
+    border-left: 4px solid #ef4444;
+    border-radius: 8px;
+    padding: 14px;
+    margin-bottom: 12px;
+}
+
+.header-refleksi {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #1e293b;
+    font-size: 14px;
+}
+
+.badge-penalti {
+    background-color: #7f1d1d;
+    color: #fecaca;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.refleksi-soalan { margin: 6px 0; font-size: 14px; color: #e2e8f0; }
+.refleksi-salah { margin: 6px 0; font-size: 13px; color: #fca5a5; }
+.refleksi-sop { margin: 6px 0 0 0; font-size: 13px; color: #93c5fd; }
+
+/* Borang Work Order & Butang Kawalan */
+.header-wo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 14px;
+}
+
+.header-wo h4 {
+    margin: 0 0 4px 0;
+    color: #facc15;
+    font-size: 16px;
+}
+
+.cop-sah {
+    border: 2px solid #22c55e;
+    color: #86efac;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 13px;
+    letter-spacing: 1px;
+}
+
+.aliran-pengesahan-wo {
+    background-color: #0f172a;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+    font-size: 13px;
+    color: #cbd5e1;
+    text-align: center;
+    margin-bottom: 16px;
+    line-height: 1.8;
+}
+
+.baris-butang-rumusan {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn-cetak {
+    background-color: #2563eb;
+    color: white;
+    flex: 1;
+}
+.btn-cetak:hover { background-color: #1d4ed8; }
+
+.btn-pusingan-baru {
+    background-color: #d97706;
+    color: white;
+    flex: 1;
+}
+.btn-pusingan-baru:hover { background-color: #b45309; }
+
+@media (max-width: 640px) {
+    .grid-4-metrik {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .jadual-rumusan thead { display: none; }
+    .jadual-rumusan,
+    .jadual-rumusan tbody,
+    .jadual-rumusan tr,
+    .jadual-rumusan td {
+        display: block;
+        width: 100%;
+    }
+
+    .jadual-rumusan tr {
+        background-color: #0f172a;
+        border: 1px solid #334155;
+        border-radius: 8px;
+        padding: 10px 12px;
+        margin-bottom: 10px;
+    }
+
+    .jadual-rumusan td {
+        border: none;
+        padding: 4px 0;
+    }
+
+    .jadual-rumusan td[data-label]:not(:first-child)::before {
+        content: attr(data-label) ": ";
+        color: #94a3b8;
+        font-size: 12px;
+    }
+
+    .baris-butang-rumusan {
+        flex-direction: column;
+    }
+}
+
+/* =========================================================
+   TETAPAN CETAKAN / SIMPAN LAPORAN PDF (@media print)
+   ========================================================= */
+@media print {
+    body {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        padding: 0 !important;
+    }
+
+    .no-print {
+        display: none !important;
+    }
+
+    .header-rumusan-cetak {
+        display: block !important;
+        border-bottom: 2px solid #000000;
+        padding-bottom: 10px;
+        margin-bottom: 14px;
+    }
+
+    .header-rumusan-cetak h2 {
+        color: #000000 !important;
+        font-size: 18px !important;
+        margin: 0 0 4px 0 !important;
+    }
+
+    .header-rumusan-cetak p {
+        color: #333333 !important;
+        font-size: 14px !important;
+        margin: 0 !important;
+        font-weight: bold;
+    }
+
+    .kad-simulasi,
+    .item-ringkasan,
+    .kad-refleksi-item,
+    .aliran-pengesahan-wo,
+    .kotak-tiada-salah {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        border: 1px solid #999999 !important;
+        box-shadow: none !important;
+        break-inside: avoid;
+    }
+
+    .jadual-rumusan th,
+    .jadual-rumusan td {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+        border: 1px solid #999999 !important;
+    }
+
+    .lencana-penarafan,
+    .cop-sah,
+    .badge-status-ok,
+    .badge-status-amaran,
+    .badge-penalti {
+        background-color: #f3f4f6 !important;
+        color: #000000 !important;
+        border: 1px solid #000000 !important;
+    }
+
+    .refleksi-soalan,
+    .refleksi-salah,
+    .refleksi-sop,
+    .ulasan-akhir,
+    .sub-status {
+        color: #111111 !important;
     }
 }

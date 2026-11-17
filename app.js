@@ -233,6 +233,18 @@ function kemasKiniPratontonAdmin() {
 }
 
 // --- PENGURUSAN SOALAN & MEDIA SETIAP WATAK (admin.html) ---
+function kemasKiniLabelDropdownWatak() {
+    const select = document.getElementById("pilihWatakSoalan");
+    if (!select) return;
+    Array.from(select.options).forEach(opt => {
+        const info = URUTAN_WATAK.find(w => w.id === opt.value);
+        const bil = bankSoalanSementara[opt.value] ? bankSoalanSementara[opt.value].soalan.length : 0;
+        if (info) {
+            opt.textContent = `${info.tajuk} (${bil} Soalan)`;
+        }
+    });
+}
+
 function simpanDrafWatakSemasa() {
     if (!bankSoalanSementara[watakSedangDisunting]) return;
     const dataWatak = bankSoalanSementara[watakSedangDisunting];
@@ -261,6 +273,51 @@ function tukarWatakEditorSoalan() {
     paparEditorSoalanWatak(watakSedangDisunting);
 }
 
+function tambahSoalanBaharu() {
+    simpanDrafWatakSemasa();
+    const senaraiSoalan = bankSoalanSementara[watakSedangDisunting].soalan;
+    const nomborBaharu = senaraiSoalan.length + 1;
+    const infoWatak = URUTAN_WATAK.find(w => w.id === watakSedangDisunting);
+    const labelWatak = infoWatak ? infoWatak.tajuk.replace(/^\d+\.\s*/, "") : watakSedangDisunting;
+
+    senaraiSoalan.push({
+        media: { jenis: "tiada", sumber: "" },
+        teks: `Soalan ${nomborBaharu} (${labelWatak}): Masukkan situasi atau soalan penyelenggaraan di sini...`,
+        pilihan: [
+            "A. Pilihan jawapan pertama",
+            "B. Pilihan jawapan kedua",
+            "C. Pilihan jawapan ketiga",
+            "D. Pilihan jawapan keempat"
+        ],
+        jawapanBetul: 0,
+        kesanSalah: "Tindakan kurang tepat dan berisiko menjejaskan prestasi mesin."
+    });
+
+    paparEditorSoalanWatak(watakSedangDisunting);
+    kemasKiniLabelDropdownWatak();
+
+    // Skrol terus ke kotak soalan baharu yang baru ditambah
+    const kadBaharu = document.getElementById(`editor_soalan_kad_${senaraiSoalan.length - 1}`);
+    if (kadBaharu) {
+        kadBaharu.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+}
+
+function padamSoalan(idx) {
+    const senaraiSoalan = bankSoalanSementara[watakSedangDisunting].soalan;
+    if (senaraiSoalan.length <= 1) {
+        alert("Setiap watak mesti mempunyai sekurang-kurangnya 1 soalan.");
+        return;
+    }
+
+    if (confirm(`Adakah cikgu pasti mahu memadam Soalan ${idx + 1}?`)) {
+        simpanDrafWatakSemasa();
+        senaraiSoalan.splice(idx, 1);
+        paparEditorSoalanWatak(watakSedangDisunting);
+        kemasKiniLabelDropdownWatak();
+    }
+}
+
 function paparEditorSoalanWatak(idWatak) {
     const dataWatak = bankSoalanSementara[idWatak];
     document.getElementById("inputNotaSerahan").value = dataWatak.notaSerahan || "";
@@ -273,10 +330,13 @@ function paparEditorSoalanWatak(idWatak) {
         const urlNilai = (s.media && s.media.sumber && s.media.sumber.startsWith("http")) ? s.media.sumber : "";
 
         bekas.innerHTML += `
-            <div class="kotak-editor-item">
+            <div class="kotak-editor-item" id="editor_soalan_kad_${idx}">
                 <div class="header-editor-item">
-                    <strong>Soalan ${idx + 1}</strong>
-                    <button type="button" class="btn-padam-kecil" onclick="padamMediaSoalan(${idx})">🗑️ Padam Media Soalan</button>
+                    <strong>Soalan ${idx + 1} daripada ${dataWatak.soalan.length}</strong>
+                    <div class="kumpulan-butang-editor">
+                        <button type="button" class="btn-padam-kecil" onclick="padamMediaSoalan(${idx})">🗑️ Padam Media</button>
+                        <button type="button" class="btn-padam-soalan" onclick="padamSoalan(${idx})">✖ Padam Soalan</button>
+                    </div>
                 </div>
 
                 <div class="kumpulan-input">
@@ -398,6 +458,7 @@ function muatBorangAdmin(data) {
     });
 
     watakSedangDisunting = document.getElementById("pilihWatakSoalan").value;
+    kemasKiniLabelDropdownWatak();
     paparEditorSoalanWatak(watakSedangDisunting);
 }
 
@@ -436,7 +497,7 @@ function resetSesiSimulasiAdmin() {
 }
 
 function setSemulaTetapan() {
-    if (confirm("Kembalikan semua tajuk, kata laluan, dan 25 soalan kepada tetapan asal?")) {
+    if (confirm("Kembalikan semua tajuk, kata laluan, dan bank soalan kepada tetapan asal?")) {
         localStorage.removeItem("dma2252_tetapan");
         localStorage.removeItem("dma2252_bank_soalan");
         localStorage.removeItem("dma2252_sesi_simulasi");

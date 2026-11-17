@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Guru / Admin - DMA2252</title>
-    <link rel="stylesheet" href="style.css?v=4">
+    <link rel="stylesheet" href="style.css?v=5">
 </head>
 <body class="halaman-admin">
     <div class="kontena-admin">
@@ -73,19 +73,19 @@
             </table>
         </div>
 
-        <!-- Bahagian 4: Pengurusan Soalan & Media Setiap Watak -->
+        <!-- Bahagian 4: Pengurusan Soalan & Media Setiap Watak (Dinamik) -->
         <div class="kad-admin">
-            <h3>4. Tetapan Soalan & Media Simulasi (5 Soalan Setiap Watak)</h3>
-            <p class="arahan" style="text-align: left;">Pilih watak di bawah untuk menyunting nota serahan, gambar/video bagi setiap soalan, teks soalan di bawahnya, dan 4 pilihan jawapan.</p>
+            <h3>4. Tetapan Soalan & Media Simulasi (Bebas Tambah / Padam Soalan)</h3>
+            <p class="arahan" style="text-align: left;">Pilih watak di bawah untuk menyunting nota serahan, gambar/video bagi setiap soalan, teks soalan, 4 pilihan jawapan, serta menambah atau memadam soalan.</p>
 
             <div class="kumpulan-input">
                 <label for="pilihWatakSoalan"><strong>Pilih Watak Simulasi:</strong></label>
                 <select id="pilihWatakSoalan" class="dropdown-admin" onchange="tukarWatakEditorSoalan()">
-                    <option value="operator">1. Operator (5 Soalan)</option>
-                    <option value="juruteknik">2. Juruteknik Penyelenggaraan (5 Soalan)</option>
-                    <option value="jurutera">3. Jurutera (5 Soalan)</option>
-                    <option value="pengurusan">4. Pengurusan (5 Soalan)</option>
-                    <option value="qc">5. Pegawai QC (5 Soalan)</option>
+                    <option value="operator">1. Operator</option>
+                    <option value="juruteknik">2. Juruteknik Penyelenggaraan</option>
+                    <option value="jurutera">3. Jurutera</option>
+                    <option value="pengurusan">4. Pengurusan</option>
+                    <option value="qc">5. Pegawai QC</option>
                 </select>
             </div>
 
@@ -94,8 +94,11 @@
                 <textarea id="inputNotaSerahan" rows="2"></textarea>
             </div>
 
-            <!-- Bekas 5 Soalan Bagi Watak Dipilih -->
+            <!-- Bekas Senarai Soalan Bagi Watak Dipilih -->
             <div id="bekas-editor-soalan"></div>
+
+            <!-- Butang Tambah Soalan Tanpa Had -->
+            <button type="button" class="btn-tambah-soalan" onclick="tambahSoalanBaharu()">➕ Tambah Soalan Baharu untuk Watak Ini</button>
         </div>
 
         <div id="notis-simpan" class="notis-berjaya">✅ Semua tetapan, media & bank soalan berjaya disimpan!</div>
@@ -106,7 +109,7 @@
         </div>
     </div>
 
-    <script src="soalan.js?v=4"></script>
-    <script src="app.js?v=4"></script>
+    <script src="soalan.js?v=5"></script>
+    <script src="app.js?v=5"></script>
 </body>
 </html>

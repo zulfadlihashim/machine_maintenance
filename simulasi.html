@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Simulasi Penyelenggaraan Mesin - DMA2252</title>
-    <link rel="stylesheet" href="style.css?v=4">
+    <link rel="stylesheet" href="style.css?v=6">
 </head>
 <body class="halaman-simulasi">
     <div class="kontena-simulasi">
         <!-- Bar Atas: Tajuk & Identiti Pengguna -->
-        <div class="header-simulasi">
+        <div class="header-simulasi no-print">
             <div>
                 <h2 id="sim-tajuk-kursus">MACHINE MAINTENANCE DMA2252</h2>
                 <span id="sim-subtopik" class="badge-subtopik">PREVENTIVE MAINTENANCE</span>
@@ -21,7 +21,7 @@
         </div>
 
         <!-- Bar Status Mesin, Kos & Giliran Semasa -->
-        <div class="grid-status-mesin">
+        <div id="bar-status-semasa" class="grid-status-mesin no-print">
             <div class="kad-status">
                 <span class="label-status">⚙️ Kesihatan Mesin</span>
                 <div class="nilai-status" id="teks-kesihatan">100%</div>
@@ -44,13 +44,13 @@
         </div>
 
         <!-- Penunjuk Aliran 5 Watak -->
-        <div class="bar-aliran-watak" id="bar-aliran-watak"></div>
+        <div id="bar-aliran-watak" class="bar-aliran-watak no-print"></div>
 
         <!-- Banner Nota Serahan Tugas -->
-        <div id="banner-serahan" class="banner-serahan"></div>
+        <div id="banner-serahan" class="banner-serahan no-print"></div>
 
         <!-- Kad Utama Soalan & Media -->
-        <div id="kad-soalan-utama" class="kad-simulasi">
+        <div id="kad-soalan-utama" class="kad-simulasi no-print">
             <div class="header-soalan">
                 <span id="label-nombor-soalan" class="badge-soalan">Soalan 1 / 5</span>
                 <span id="status-kunci-jawapan" class="badge-kunci">🔒 Mod Pemerhati (Baca Sahaja)</span>
@@ -69,30 +69,95 @@
             <div id="kotak-maklum-balas" class="kotak-maklum-balas" style="display: none;"></div>
         </div>
 
-        <!-- Kad Laporan Tamat Simulasi (Dipaparkan selepas Pegawai QC selesai) -->
-        <div id="kad-tamat-simulasi" class="kad-simulasi kad-tamat" style="display: none;">
-            <h2>🏆 Simulasi Penyelenggaraan Selesai!</h2>
-            <p>Borang Arahan Kerja telah lengkap daripada <strong>Operator</strong> sehingga disahkan oleh <strong>Pegawai QC</strong>.</p>
-            <div class="ringkasan-akhir">
-                <div class="item-ringkasan">
-                    <span>Kesihatan Akhir Mesin</span>
-                    <strong id="akhir-kesihatan">100%</strong>
+        <!-- =========================================================
+             DASHBOARD RUMUSAN AKHIR (4 BAHAGIAN LENGKAP)
+             ========================================================= -->
+        <div id="kad-tamat-simulasi" class="dashboard-rumusan" style="display: none;">
+            
+            <!-- Bahagian 1: Kad Penarafan & Status Operasi Mesin -->
+            <div class="kad-simulasi kad-penarafan">
+                <div class="header-rumusan-cetak">
+                    <h2 id="cetak-tajuk-kursus">MACHINE MAINTENANCE DMA2252 KOLEJ VOKASIONAL KERIAN</h2>
+                    <p id="cetak-subtopik">SUBTOPIK (PREVENTIVE MAINTENANCE)</p>
                 </div>
-                <div class="item-ringkasan">
-                    <span>Jumlah Kos Baik Pulih</span>
-                    <strong id="akhir-kos">RM 0</strong>
-                </div>
-                <div class="item-ringkasan">
-                    <span>Jumlah Kesilapan</span>
-                    <strong id="akhir-salah">0</strong>
+
+                <h3>📊 Laporan Rumusan Simulasi Penyelenggaraan</h3>
+                <div id="lencana-penarafan" class="lencana-penarafan status-optimum">🟢 OPERASI OPTIMUM (80% – 100%)</div>
+                <p id="ulasan-prestasi" class="ulasan-akhir"></p>
+
+                <div class="grid-4-metrik">
+                    <div class="item-ringkasan">
+                        <span>⚙️ Kesihatan Akhir</span>
+                        <strong id="akhir-kesihatan">100%</strong>
+                    </div>
+                    <div class="item-ringkasan">
+                        <span>💰 Jumlah Kos</span>
+                        <strong id="akhir-kos" class="teks-kos">RM 0</strong>
+                    </div>
+                    <div class="item-ringkasan">
+                        <span>❌ Jumlah Kesilapan</span>
+                        <strong id="akhir-salah">0 kali</strong>
+                    </div>
+                    <div class="item-ringkasan">
+                        <span>⏱️ Tempoh Simulasi</span>
+                        <strong id="akhir-tempoh">0 min 0 saat</strong>
+                    </div>
                 </div>
             </div>
-            <p id="ulasan-prestasi" class="ulasan-akhir"></p>
-            <button type="button" class="btn-utama" onclick="keluarSimulasi()">Kembali ke Halaman Utama</button>
+
+            <!-- Bahagian 2: Jadual Pecahan Prestasi Mengikut 5 Watak -->
+            <div class="kad-simulasi">
+                <h3>👥 Pecahan Prestasi Mengikut 5 Watak</h3>
+                <p class="sub-status" style="margin-bottom: 12px;">Penilaian rantaian kerja berpasukan dari peringkat operasi hingga pengesahan kualiti.</p>
+                <table class="jadual-rumusan">
+                    <thead>
+                        <tr>
+                            <th>Watak Simulasi</th>
+                            <th>Nama Pelajar</th>
+                            <th>Bil. Salah</th>
+                            <th>Penalti Kos</th>
+                            <th>Status Tugasan</th>
+                        </tr>
+                    </thead>
+                    <tbody id="jadual-prestasi-watak"></tbody>
+                </table>
+            </div>
+
+            <!-- Bahagian 3: Papan Refleksi "Belajar Dari Kesilapan" -->
+            <div class="kad-simulasi">
+                <h3>🔍 Papan Refleksi: Belajar Dari Kesilapan (Semakan SOP)</h3>
+                <p class="sub-status" style="margin-bottom: 12px;">Senarai kesilapan teknikal yang berlaku sepanjang sesi untuk perbincangan kelas.</p>
+                <div id="senarai-refleksi-kesilapan"></div>
+            </div>
+
+            <!-- Bahagian 4: Borang Pengesahan Kerja (Work Order) & Kawalan Sesi -->
+            <div class="kad-simulasi kad-work-order">
+                <div class="header-wo">
+                    <div>
+                        <h4>📋 PENGESAHAN BORANG ARAHAN KERJA (WORK ORDER)</h4>
+                        <span id="wo-tarikh-masa" class="sub-status">Tarikh & Masa Selesai: -</span>
+                    </div>
+                    <span class="cop-sah">DISAHKAN LENGKAP</span>
+                </div>
+
+                <div class="aliran-pengesahan-wo">
+                    <span>1. Operator</span> ➔ 
+                    <span>2. Juruteknik</span> ➔ 
+                    <span>3. Jurutera</span> ➔ 
+                    <span>4. Pengurusan</span> ➔ 
+                    <span>5. Pegawai QC (Lulus)</span>
+                </div>
+
+                <div class="baris-butang-rumusan no-print">
+                    <button type="button" class="btn-cetak" onclick="window.print()">🖨️ Cetak / Simpan Laporan PDF</button>
+                    <button type="button" class="btn-pusingan-baru" onclick="bukaModalResetAkhir()">🔄 Mula Pusingan Baharu</button>
+                    <button type="button" class="btn-batal" onclick="keluarSimulasi()">← Halaman Utama</button>
+                </div>
+            </div>
         </div>
 
-        <!-- Papan Log Pergerakan & Kesilapan Langsung (Untuk Semua Pelajar Belajar) -->
-        <div class="kad-simulasi">
+        <!-- Papan Log Pergerakan & Kesilapan Langsung -->
+        <div id="kad-log-langsung" class="kad-simulasi no-print">
             <div class="header-log">
                 <h3>📋 Papan Log Pergerakan & Kesilapan Langsung</h3>
                 <span class="sub-status">Semua pelajar dapat memantau tindakan setiap watak di sini</span>
@@ -101,7 +166,23 @@
         </div>
     </div>
 
-    <script src="soalan.js?v=4"></script>
-    <script src="simulasi.js?v=4"></script>
+    <!-- Modal Pengesahan Admin untuk Mula Pusingan Baharu -->
+    <div id="modal-reset-akhir" class="modal-latar no-print">
+        <div class="modal-kotak">
+            <h3>🔄 Mula Pusingan Baharu</h3>
+            <p>Masukkan kata laluan <strong>Guru / Admin</strong> untuk menetapkan semula sesi simulasi bagi kumpulan seterusnya.</p>
+            <div class="kumpulan-input">
+                <input type="password" id="passResetAkhirInput" placeholder="Kata laluan Admin (Asal: 123)">
+            </div>
+            <p id="ralat-reset-akhir" class="ralat">Kata laluan Admin tidak sah!</p>
+            <div class="baris-butang">
+                <button type="button" class="btn-batal" onclick="tutupModalResetAkhir()">Batal</button>
+                <button type="button" class="btn-utama" onclick="sahkanResetAkhir()">Sahkan & Reset</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="soalan.js?v=6"></script>
+    <script src="simulasi.js?v=6"></script>
 </body>
 </html>
