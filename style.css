@@ -18,11 +18,10 @@ body {
 .kontena-utama {
     text-align: center;
     width: 100%;
-    max-width: 650px;
-    padding: 20px 16px;
+    max-width: 680px;
+    padding: 24px 16px;
 }
 
-/* Saiz tulisan fleksibel (automatik kecil di telefon, besar di desktop) */
 #paparan-tajuk {
     font-size: clamp(18px, 4vw, 24px);
     margin-bottom: 8px;
@@ -33,7 +32,57 @@ body {
     font-size: clamp(15px, 3.2vw, 18px);
     color: #facc15;
     margin-top: 0;
-    margin-bottom: 24px;
+    margin-bottom: 20px;
+}
+
+/* Kotak Media (Video / Gambar JPEG & Teks) */
+.kotak-media-utama,
+.kotak-media-soalan {
+    background-color: #1e293b;
+    padding: 14px;
+    border-radius: 12px;
+    margin-bottom: 18px;
+    border: 1px solid #334155;
+}
+
+.media-gambar,
+.media-video {
+    width: 100%;
+    max-height: 360px;
+    object-fit: contain;
+    border-radius: 8px;
+    background-color: #020617;
+    display: block;
+    margin: 0 auto;
+}
+
+.bingkai-video {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    background-color: #020617;
+}
+
+.bingkai-video iframe {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+}
+
+.teks-penerangan-media {
+    margin: 14px 0 2px 0;
+    font-size: 15px;
+    line-height: 1.6;
+    color: #e2e8f0;
+    text-align: left;
+    background-color: #0f172a;
+    padding: 12px 14px;
+    border-radius: 8px;
+    border-left: 4px solid #3b82f6;
+    white-space: pre-line;
 }
 
 /* Kotak Log Masuk */
@@ -44,31 +93,25 @@ body {
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
 }
 
-.kotak-login h3 {
-    margin-top: 0;
-}
-
-.arahan {
-    font-size: 14px;
-    color: #94a3b8;
-    margin-bottom: 20px;
-}
+.kotak-login h3 { margin-top: 0; }
+.arahan { font-size: 14px; color: #94a3b8; margin-bottom: 18px; }
 
 .kumpulan-input {
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     text-align: left;
 }
 
 .kumpulan-input label {
     display: block;
     margin-bottom: 6px;
-    font-size: 14px;
+    font-size: 13px;
     color: #cbd5e1;
 }
 
-/* Font 16px mengelakkan skrin telefon auto-zoom bila ditaip */
 input[type="text"],
-input[type="password"] {
+input[type="password"],
+textarea,
+.dropdown-admin {
     width: 100%;
     min-height: 44px;
     padding: 10px 12px;
@@ -77,14 +120,28 @@ input[type="password"] {
     background-color: #0f172a;
     color: white;
     font-size: 16px;
+    font-family: inherit;
 }
 
-input:focus {
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px dashed #475569;
+    border-radius: 8px;
+    background-color: #0f172a;
+    color: #cbd5e1;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+input:focus,
+textarea:focus,
+.dropdown-admin:focus {
     outline: none;
     border-color: #3b82f6;
 }
 
-/* Butang Mesra Sentuhan */
+/* Butang */
 button {
     min-height: 46px;
     padding: 12px 16px;
@@ -103,6 +160,14 @@ button {
     margin-top: 4px;
 }
 .btn-utama:hover { background-color: #1d4ed8; }
+
+.btn-pemerhati {
+    width: 100%;
+    background-color: #0d9488;
+    color: white;
+    margin-top: 10px;
+}
+.btn-pemerhati:hover { background-color: #0f766e; }
 
 .btn-admin {
     width: 100%;
@@ -125,16 +190,31 @@ button {
 }
 .btn-batal:hover { background-color: #334155; }
 
+.btn-reset-sesi {
+    background-color: #0284c7;
+    color: white;
+}
+.btn-reset-sesi:hover { background-color: #0369a1; }
+
+.btn-padam-kecil {
+    min-height: 34px;
+    padding: 6px 12px;
+    font-size: 13px;
+    background-color: #dc2626;
+    color: white;
+}
+.btn-padam-kecil:hover { background-color: #b91c1c; }
+
 .pemisah {
     border: 0;
     border-top: 1px solid #334155;
-    margin: 20px 0;
+    margin: 18px 0;
 }
 
 .ralat {
     color: #f87171;
     font-size: 14px;
-    margin-top: 12px;
+    margin-top: 10px;
     display: none;
 }
 
@@ -167,33 +247,47 @@ button {
     margin-top: 15px;
 }
 
-/* Halaman Admin (Desktop) */
-body.halaman-admin {
+/* =========================================================
+   HALAMAN ADMIN
+   ========================================================= */
+body.halaman-admin,
+body.halaman-simulasi {
     align-items: flex-start;
-    padding: 24px 16px;
+    padding: 20px 14px;
 }
 
-.kontena-admin {
+.kontena-admin,
+.kontena-simulasi {
     width: 100%;
-    max-width: 820px;
+    max-width: 900px;
 }
 
-.header-admin {
+.header-admin,
+.header-simulasi {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
-    gap: 15px;
+    margin-bottom: 18px;
+    gap: 12px;
+    flex-wrap: wrap;
 }
 
-.header-admin h2 { margin: 0 0 5px 0; color: #facc15; font-size: 20px; }
+.header-admin h2,
+.header-simulasi h2 { margin: 0 0 4px 0; color: #facc15; font-size: 19px; }
 .header-admin p { margin: 0; font-size: 14px; color: #94a3b8; }
 
-.kad-admin {
+.baris-butang-atas {
+    display: flex;
+    gap: 8px;
+}
+
+.kad-admin,
+.kad-simulasi {
     background-color: #1e293b;
     padding: 20px 16px;
     border-radius: 12px;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
+    border: 1px solid #334155;
 }
 
 .kad-admin h3 {
@@ -203,19 +297,54 @@ body.halaman-admin {
     font-size: 17px;
 }
 
-.jadual-admin {
-    width: 100%;
-    border-collapse: collapse;
+.kotak-pratonton {
+    background-color: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 8px;
+    padding: 12px;
 }
 
+.header-pratonton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+.isi-pratonton { text-align: center; }
+.teks-tiada-media { display: block; padding: 14px; color: #64748b; font-size: 13px; }
+
+.jadual-admin { width: 100%; border-collapse: collapse; }
 .jadual-admin th,
-.jadual-admin td {
-    padding: 10px 8px;
-    text-align: left;
-    border-bottom: 1px solid #334155;
+.jadual-admin td { padding: 10px 8px; text-align: left; border-bottom: 1px solid #334155; }
+.jadual-admin th { color: #94a3b8; font-size: 14px; }
+
+/* Editor Soalan Admin */
+.kotak-editor-item {
+    background-color: #0f172a;
+    border: 1px solid #334155;
+    border-radius: 10px;
+    padding: 16px;
+    margin-top: 16px;
 }
 
-.jadual-admin th { color: #94a3b8; font-size: 14px; }
+.header-editor-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #1e293b;
+    color: #38bdf8;
+}
+
+.grid-input-pilihan {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
 
 .notis-berjaya {
     display: none;
@@ -229,21 +358,272 @@ body.halaman-admin {
 }
 
 /* =========================================================
-   PENYESUAIAN KHUSUS TELEFON PINTAR (Skrin <= 640px)
+   HALAMAN SIMULASI
+   ========================================================= */
+.badge-subtopik {
+    font-size: 13px;
+    color: #94a3b8;
+}
+
+.info-pengguna-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.badge-watak {
+    padding: 8px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: bold;
+}
+.badge-pemain { background-color: #1d4ed8; color: white; }
+.badge-pemerhati { background-color: #0f766e; color: #ccfbf1; }
+
+.btn-keluar-kecil {
+    min-height: 38px;
+    padding: 8px 12px;
+    font-size: 13px;
+}
+
+.grid-status-mesin {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.kad-status {
+    background-color: #1e293b;
+    padding: 14px;
+    border-radius: 10px;
+    border: 1px solid #334155;
+}
+
+.label-status { font-size: 12px; color: #94a3b8; display: block; }
+.nilai-status { font-size: 22px; font-weight: bold; margin: 4px 0; }
+.teks-kos { color: #f87171; }
+.teks-giliran { color: #facc15; font-size: 17px; }
+.sub-status { font-size: 12px; color: #64748b; }
+
+.bar-latar {
+    width: 100%;
+    height: 10px;
+    background-color: #0f172a;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-top: 6px;
+}
+
+.bar-isi {
+    height: 100%;
+    background-color: #22c55e;
+    transition: width 0.4s ease;
+}
+
+/* Aliran 5 Watak */
+.bar-aliran-watak {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.langkah-watak {
+    background-color: #1e293b;
+    color: #64748b;
+    padding: 8px 6px;
+    border-radius: 8px;
+    font-size: 12px;
+    text-align: center;
+    border: 1px solid #334155;
+}
+
+.langkah-watak.aktif {
+    background-color: #1e3a8a;
+    color: #ffffff;
+    border-color: #3b82f6;
+    font-weight: bold;
+}
+
+.langkah-watak.selesai {
+    background-color: #14532d;
+    color: #86efac;
+    border-color: #22c55e;
+}
+
+.banner-serahan {
+    background-color: #172554;
+    border-left: 4px solid #38bdf8;
+    color: #bae6fd;
+    padding: 12px 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    margin-bottom: 16px;
+    line-height: 1.5;
+}
+
+.header-soalan {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.badge-soalan {
+    background-color: #334155;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.badge-kunci {
+    background-color: #334155;
+    color: #cbd5e1;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 13px;
+}
+.badge-kunci.aktif {
+    background-color: #14532d;
+    color: #86efac;
+}
+
+.teks-soalan {
+    font-size: 16px;
+    line-height: 1.6;
+    background-color: #0f172a;
+    padding: 14px;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    border-left: 4px solid #facc15;
+    white-space: pre-line;
+}
+
+.grid-pilihan {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+.btn-pilihan-jawapan {
+    background-color: #0f172a;
+    color: #f8fafc;
+    border: 1px solid #475569;
+    text-align: left;
+    font-weight: normal;
+    line-height: 1.4;
+    padding: 14px 16px;
+}
+
+.btn-pilihan-jawapan:hover:not(:disabled) {
+    border-color: #3b82f6;
+    background-color: #1e3a8a;
+}
+
+.btn-pilihan-jawapan:disabled {
+    opacity: 0.65;
+    cursor: not-allowed;
+}
+
+.btn-pilihan-jawapan.jawapan-betul {
+    background-color: #14532d !important;
+    border-color: #22c55e !important;
+    color: #bbf7d0 !important;
+    opacity: 1 !important;
+}
+
+.btn-pilihan-jawapan.jawapan-salah {
+    background-color: #7f1d1d !important;
+    border-color: #ef4444 !important;
+    color: #fecaca !important;
+    opacity: 1 !important;
+}
+
+.kotak-maklum-balas {
+    margin-top: 16px;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+.kotak-maklum-balas.betul {
+    background-color: #14532d;
+    border: 1px solid #22c55e;
+    color: #bbf7d0;
+}
+.kotak-maklum-balas.salah {
+    background-color: #7f1d1d;
+    border: 1px solid #ef4444;
+    color: #fecaca;
+}
+
+/* Log Aktiviti Langsung */
+.header-log h3 { margin: 0 0 4px 0; font-size: 16px; }
+.kotak-log-aktiviti {
+    margin-top: 12px;
+    max-height: 260px;
+    overflow-y: auto;
+    background-color: #0f172a;
+    border-radius: 8px;
+    padding: 10px;
+    border: 1px solid #334155;
+}
+
+.item-log {
+    padding: 10px;
+    border-bottom: 1px solid #1e293b;
+    font-size: 13px;
+    line-height: 1.5;
+}
+.item-log:last-child { border-bottom: none; }
+.masa-log { color: #64748b; margin-right: 6px; font-family: monospace; }
+.log-salah { background-color: rgba(127, 29, 29, 0.35); border-left: 3px solid #ef4444; }
+.log-betul { border-left: 3px solid #22c55e; }
+.log-serahan { background-color: rgba(30, 58, 138, 0.4); border-left: 3px solid #38bdf8; }
+
+/* Laporan Tamat */
+.kad-tamat { text-align: center; }
+.ringkasan-akhir {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin: 20px 0;
+}
+.item-ringkasan {
+    background-color: #0f172a;
+    padding: 14px;
+    border-radius: 8px;
+    border: 1px solid #334155;
+}
+.item-ringkasan span { display: block; font-size: 12px; color: #94a3b8; }
+.item-ringkasan strong { font-size: 20px; color: #facc15; }
+.ulasan-akhir { font-size: 15px; color: #cbd5e1; margin-bottom: 20px; }
+
+/* =========================================================
+   PENYESUAIAN TELEFON PINTAR (<= 640px)
    ========================================================= */
 @media (max-width: 640px) {
-    /* Susun header admin secara menegak */
-    .header-admin {
+    .grid-status-mesin,
+    .ringkasan-akhir,
+    .grid-input-pilihan {
+        grid-template-columns: 1fr;
+    }
+
+    .bar-aliran-watak {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .header-admin,
+    .header-simulasi {
         flex-direction: column;
         align-items: stretch;
-        text-align: left;
     }
 
-    /* Tukar jadual 3 lajur menjadi kad menegak supaya input lebar penuh */
-    .jadual-admin thead {
-        display: none;
-    }
-
+    .jadual-admin thead { display: none; }
     .jadual-admin,
     .jadual-admin tbody,
     .jadual-admin tr,
@@ -260,12 +640,7 @@ body.halaman-admin {
         margin-bottom: 12px;
     }
 
-    .jadual-admin td {
-        border: none;
-        padding: 6px 0;
-    }
-
-    /* Paparkan label kecil di atas setiap kotak input pada telefon */
+    .jadual-admin td { border: none; padding: 6px 0; }
     .jadual-admin td[data-label]:not(:first-child)::before {
         content: attr(data-label);
         display: block;
@@ -274,7 +649,6 @@ body.halaman-admin {
         margin-bottom: 4px;
     }
 
-    /* Susun butang simpan & set semula secara menegak di telefon */
     .kontena-admin .baris-butang {
         flex-direction: column-reverse;
     }

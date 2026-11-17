@@ -4,16 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Guru / Admin - DMA2252</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=4">
 </head>
 <body class="halaman-admin">
     <div class="kontena-admin">
         <div class="header-admin">
             <div>
                 <h2>⚙️ Panel Kawalan Guru / Admin</h2>
-                <p>Ubah tajuk kursus, senarai nama pelajar, dan kata laluan 5 watak simulasi.</p>
+                <p>Urus tajuk, media skrin utama, kata laluan 5 watak, dan bank soalan simulasi.</p>
             </div>
-            <button class="btn-batal" onclick="logKeluarAdmin()">← Kembali ke Log Masuk</button>
+            <div class="baris-butang-atas">
+                <button type="button" class="btn-reset-sesi" onclick="resetSesiSimulasiAdmin()">🔄 Reset Sesi Kelas</button>
+                <button type="button" class="btn-batal" onclick="logKeluarAdmin()">← Log Masuk</button>
+            </div>
         </div>
 
         <!-- Bahagian 1: Ubah Tajuk & Subtopik -->
@@ -29,9 +32,35 @@
             </div>
         </div>
 
-        <!-- Bahagian 2: Tetapan 5 Watak Pelajar -->
+        <!-- Bahagian 2: Muat Naik Video / Gambar JPEG & Teks Skrin Login -->
         <div class="kad-admin">
-            <h3>2. Tetapan Nama Pelajar & Kata Laluan (5 Watak)</h3>
+            <h3>2. Paparan Media & Penerangan (Skrin Log Masuk)</h3>
+            <div class="kumpulan-input">
+                <label for="uploadMediaFile">Pilihan A: Muat Naik Gambar (JPEG/PNG) atau Video Pendek (MP4 maks 3MB):</label>
+                <input type="file" id="uploadMediaFile" accept="image/jpeg,image/png,image/webp,video/mp4" onchange="kendaliMuatNaikFail(event)">
+            </div>
+            <div class="kumpulan-input">
+                <label for="inputUrlMedia">Pilihan B: Atau Tampal Pautan YouTube / Google Drive / URL Gambar:</label>
+                <input type="text" id="inputUrlMedia" placeholder="Tampal pautan di sini..." oninput="kendaliInputUrl(this.value)">
+            </div>
+            <div class="kotak-pratonton">
+                <div class="header-pratonton">
+                    <span>Pratonton Media Skrin Utama:</span>
+                    <button type="button" class="btn-padam-kecil" onclick="padamMediaSemasa()">🗑️ Padam Media</button>
+                </div>
+                <div id="pratonton-media-admin" class="isi-pratonton">
+                    <span class="teks-tiada-media">Tiada gambar atau video ditetapkan.</span>
+                </div>
+            </div>
+            <div class="kumpulan-input" style="margin-top: 15px;">
+                <label for="inputTeksMedia">Teks Penerangan di Bawah Gambar / Video:</label>
+                <textarea id="inputTeksMedia" rows="2" placeholder="Penerangan ringkas sebelum pelajar log masuk..."></textarea>
+            </div>
+        </div>
+
+        <!-- Bahagian 3: Tetapan 5 Watak Pelajar -->
+        <div class="kad-admin">
+            <h3>3. Tetapan Nama Pelajar & Kata Laluan (5 Watak)</h3>
             <table class="jadual-admin">
                 <thead>
                     <tr>
@@ -40,20 +69,44 @@
                         <th>Kata Laluan</th>
                     </tr>
                 </thead>
-                <tbody id="senarai-watak-admin">
-                    <!-- Dijana secara automatik oleh app.js -->
-                </tbody>
+                <tbody id="senarai-watak-admin"></tbody>
             </table>
         </div>
 
-        <div id="notis-simpan" class="notis-berjaya">✅ Semua tetapan berjaya disimpan!</div>
+        <!-- Bahagian 4: Pengurusan Soalan & Media Setiap Watak -->
+        <div class="kad-admin">
+            <h3>4. Tetapan Soalan & Media Simulasi (5 Soalan Setiap Watak)</h3>
+            <p class="arahan" style="text-align: left;">Pilih watak di bawah untuk menyunting nota serahan, gambar/video bagi setiap soalan, teks soalan di bawahnya, dan 4 pilihan jawapan.</p>
+
+            <div class="kumpulan-input">
+                <label for="pilihWatakSoalan"><strong>Pilih Watak Simulasi:</strong></label>
+                <select id="pilihWatakSoalan" class="dropdown-admin" onchange="tukarWatakEditorSoalan()">
+                    <option value="operator">1. Operator (5 Soalan)</option>
+                    <option value="juruteknik">2. Juruteknik Penyelenggaraan (5 Soalan)</option>
+                    <option value="jurutera">3. Jurutera (5 Soalan)</option>
+                    <option value="pengurusan">4. Pengurusan (5 Soalan)</option>
+                    <option value="qc">5. Pegawai QC (5 Soalan)</option>
+                </select>
+            </div>
+
+            <div class="kumpulan-input">
+                <label for="inputNotaSerahan">Nota Situasi / Serahan Tugas (Dipaparkan di bahagian atas watak ini):</label>
+                <textarea id="inputNotaSerahan" rows="2"></textarea>
+            </div>
+
+            <!-- Bekas 5 Soalan Bagi Watak Dipilih -->
+            <div id="bekas-editor-soalan"></div>
+        </div>
+
+        <div id="notis-simpan" class="notis-berjaya">✅ Semua tetapan, media & bank soalan berjaya disimpan!</div>
 
         <div class="baris-butang">
-            <button class="btn-batal" onclick="setSemulaTetapan()">🔄 Set Semula Asal</button>
-            <button class="btn-simpan" onclick="simpanTetapanAdmin()">💾 Simpan Semua Tetapan</button>
+            <button type="button" class="btn-batal" onclick="setSemulaTetapan()">🔄 Set Semula Asal</button>
+            <button type="button" class="btn-simpan" onclick="simpanTetapanAdmin()">💾 Simpan Semua Tetapan & Soalan</button>
         </div>
     </div>
 
-    <script src="app.js"></script>
+    <script src="soalan.js?v=4"></script>
+    <script src="app.js?v=4"></script>
 </body>
 </html>
